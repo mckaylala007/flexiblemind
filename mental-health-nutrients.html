@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mental Health Nutrients — A Periodic Table for Staying Okay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F4EC;
+    --ink:#29332B;
+    --ink-soft:#54614F;
+    --line:#D6DCC9;
+    --trust:#C9A24B;
+    --self:#BB8291;
+    --resto:#7E9A72;
+    --relat:#6C88A3;
+    --outward:#C08A57;
+    --rhythm:#9286AC;
+    --toxin-bg:#2B2330;
+    --toxin-ink:#EDE6F0;
+    --antidote:#D8C69A;
+    --card:#FBFCF7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  ::selection{background:var(--resto);color:#fff}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header{
+    padding:20px 0 0;
+  }
+  .masthead{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--line);padding-bottom:14px;
+  }
+  .masthead .site{font-family:'Young Serif',serif;font-size:1.05rem}
+  .masthead nav a{
+    color:var(--ink-soft);text-decoration:none;font-size:.9rem;margin-left:22px;
+  }
+  .masthead nav a:hover{color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 40px;max-width:760px}
+  .hero .kicker{
+    font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:'Young Serif',serif;
+    font-size:clamp(2.1rem,5.4vw,3.4rem);
+    line-height:1.12;font-weight:400;margin-bottom:22px;
+  }
+  .hero h1 em{font-style:normal;color:var(--resto)}
+  .hero p{color:var(--ink-soft);font-size:1.08rem;max-width:56ch}
+  .hero .from{
+    margin-top:26px;font-style:italic;color:var(--ink);font-size:1rem;
+  }
+
+  /* ---------- legend ---------- */
+  .legend{
+    display:flex;flex-wrap:wrap;gap:14px 26px;
+    padding:22px 0 8px;border-top:1px solid var(--line);
+  }
+  .legend .key{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-soft)}
+  .legend .dot{width:11px;height:11px;border-radius:50%}
+  .legend .pair-note{font-size:.85rem;color:var(--ink-soft)}
+
+  /* ---------- table ---------- */
+  section{padding:52px 0}
+  .section-head{max-width:640px;margin-bottom:30px}
+  .section-head h2{
+    font-family:'Young Serif',serif;font-weight:400;
+    font-size:1.7rem;margin-bottom:10px;
+  }
+  .section-head p{color:var(--ink-soft)}
+
+  .table-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
+    gap:12px;
+  }
+  .tile{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:5px solid var(--fam,var(--line));
+    border-radius:6px;
+    padding:14px 14px 12px;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+    transition:transform .16s ease, box-shadow .16s ease;
+    position:relative;
+    min-height:128px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .tile:hover,.tile:focus-visible{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(41,51,43,.10);
+  }
+  .tile:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .tile .sym{
+    font-family:'Young Serif',serif;
+    font-size:1.9rem;line-height:1;
+  }
+  .tile .name{font-weight:700;font-size:.92rem;margin-top:10px}
+  .tile .sub{font-size:.76rem;color:var(--ink-soft);margin-top:2px}
+  .tile .pair{
+    position:absolute;top:10px;right:12px;
+    font-size:.75rem;color:var(--ink-soft);
+  }
+
+  /* foundation row */
+  .foundation{margin-top:26px}
+  .foundation .tile{
+    border-top:5px solid var(--ink);
+    min-height:auto;
+    flex-direction:row;align-items:center;gap:20px;
+    width:100%;
+  }
+  .foundation .sym{font-size:2.2rem}
+  .foundation .fnd-text .name{margin-top:0;font-size:1rem}
+  .foundation .fnd-text .sub{max-width:60ch}
+  .foundation-label{
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);margin:34px 0 10px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .foundation-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* ---------- toxins ---------- */
+  .toxins{
+    background:var(--toxin-bg);color:var(--toxin-ink);
+    border-radius:12px;padding:44px 40px 40px;
+  }
+  .toxins .section-head h2{color:var(--toxin-ink)}
+  .toxins .section-head p{color:#B7A9BE}
+  .toxin-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:14px;margin-top:8px;
+  }
+  .toxin{
+    border:1px solid #4A3E51;border-radius:8px;padding:18px;
+    background:rgba(255,255,255,.03);
+  }
+  .toxin .t-name{
+    font-family:'Young Serif',serif;font-size:1.15rem;margin-bottom:6px;
+  }
+  .toxin .t-feel{font-size:.87rem;color:#B7A9BE;min-height:3.4em}
+  .toxin .t-anti{
+    margin-top:14px;padding-top:12px;border-top:1px dashed #4A3E51;
+    font-size:.85rem;
+  }
+  .toxin .t-anti b{color:var(--antidote);font-weight:700}
+  .toxin.empty{
+    display:flex;align-items:center;justify-content:center;
+    border-style:dashed;color:#8d7f96;font-size:.88rem;text-align:center;
+    min-height:150px;
+  }
+
+  /* ---------- tools ---------- */
+  .tools .tool-row{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:14px;
+  }
+  .tool{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:20px;
+  }
+  .tool h3{font-family:'Young Serif',serif;font-weight:400;font-size:1.1rem;margin-bottom:8px}
+  .tool p{font-size:.9rem;color:var(--ink-soft)}
+  .tool .found-in{margin-top:12px;font-size:.78rem;color:var(--ink-soft)}
+  .tool .found-in span{
+    display:inline-block;background:var(--paper);border:1px solid var(--line);
+    border-radius:20px;padding:2px 10px;margin:3px 3px 0 0;
+  }
+
+  /* ---------- blog ---------- */
+  .blog .post{
+    border-top:1px solid var(--line);padding:22px 0;
+    display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:baseline;
+  }
+  .blog .post .date{font-size:.82rem;color:var(--ink-soft)}
+  .blog .post h3{font-family:'Young Serif',serif;font-weight:400;font-size:1.2rem}
+  .blog .post p{color:var(--ink-soft);font-size:.95rem;margin-top:6px}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0 50px;color:var(--ink-soft);font-size:.88rem;
+  }
+
+  /* ---------- modal: nutrient facts ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(41,51,43,.45);
+    display:none;align-items:center;justify-content:center;
+    padding:24px;z-index:50;
+  }
+  .overlay.open{display:flex}
+  .facts{
+    background:#fff;color:#111;
+    width:min(430px,100%);max-height:88vh;overflow-y:auto;
+    border:2.5px solid #111;border-radius:4px;
+    padding:22px 24px;
+    font-family:'Karla',sans-serif;
+    position:relative;
+  }
+  .facts .close{
+    position:absolute;top:10px;right:12px;
+    background:none;border:none;font-size:1.5rem;cursor:pointer;
+    line-height:1;color:#111;padding:6px;
+  }
+  .facts .fam-tag{
+    display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    color:#fff;border-radius:3px;padding:3px 9px;margin-bottom:10px;
+  }
+  .facts h2{
+    font-family:'Young Serif',serif;font-weight:400;
+    font-size:2rem;line-height:1.05;
+  }
+  .facts .facts-title{
+    font-weight:700;font-size:1.25rem;border-bottom:9px solid #111;
+    padding:14px 0 6px;margin-bottom:4px;letter-spacing:.01em;
+  }
+  .facts .serving{font-size:.85rem;border-bottom:4px solid #111;padding-bottom:6px}
+  .facts .row{
+    border-bottom:1px solid #111;padding:10px 0;
+  }
+  .facts .row:last-of-type{border-bottom:9px solid #111}
+  .facts .row .label{font-weight:700;font-size:.95rem}
+  .facts .row p{font-size:.92rem;margin-top:4px}
+  .facts .row ul{margin:6px 0 0 18px;font-size:.92rem}
+  .facts .row li{margin-bottom:4px}
+  .facts .fine{font-size:.78rem;color:#555;padding-top:10px}
+  .facts .pair-line{font-size:.85rem;margin-top:10px;font-style:italic}
+
+  /* dive deeper button inside facts */
+  .dive{
+    display:block;width:100%;margin-top:14px;
+    background:var(--ink);color:#fff;border:none;border-radius:4px;
+    padding:13px 16px;font-family:'Karla',sans-serif;font-weight:700;
+    font-size:.95rem;cursor:pointer;
+  }
+  .dive:hover{opacity:.92}
+  .dive small{display:block;font-weight:400;font-size:.78rem;opacity:.8;margin-top:2px}
+
+  /* ---------- deep dive article ---------- */
+  .article-overlay{
+    position:fixed;inset:0;background:var(--paper);
+    display:none;overflow-y:auto;z-index:60;
+  }
+  .article-overlay.open{display:block}
+  .article{
+    max-width:680px;margin:0 auto;padding:34px 24px 90px;
+  }
+  .article .back{
+    background:none;border:1px solid var(--line);border-radius:20px;
+    padding:8px 18px;font-family:'Karla',sans-serif;font-size:.88rem;
+    color:var(--ink-soft);cursor:pointer;margin-bottom:40px;
+  }
+  .article .back:hover{color:var(--ink);border-color:var(--ink-soft)}
+  .article .a-fam{
+    display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;border-radius:3px;padding:3px 9px;margin-bottom:14px;
+  }
+  .article h1{
+    font-family:'Young Serif',serif;font-weight:400;
+    font-size:clamp(2rem,5vw,2.8rem);line-height:1.1;margin-bottom:8px;
+  }
+  .article .a-serving{color:var(--ink-soft);font-style:italic;margin-bottom:26px}
+  .audio-bar{
+    display:flex;align-items:center;gap:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:14px 18px;margin-bottom:38px;
+  }
+  .audio-bar .play{
+    width:44px;height:44px;border-radius:50%;flex-shrink:0;
+    background:var(--ink);color:#fff;border:none;font-size:1rem;
+    cursor:default;opacity:.5;
+  }
+  .audio-bar .a-meta{font-size:.88rem;color:var(--ink-soft)}
+  .audio-bar .a-meta b{color:var(--ink);display:block;font-size:.92rem}
+  .article-body h2{
+    font-family:'Young Serif',serif;font-weight:400;font-size:1.35rem;
+    margin:36px 0 12px;
+  }
+  .article-body p{margin-bottom:16px}
+  .article-body p.prompt{
+    color:var(--ink-soft);font-style:italic;
+    border-left:3px solid var(--line);padding:6px 0 6px 16px;
+  }
+  .article-body .quickref{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:20px 22px;margin-top:44px;
+  }
+  .article-body .quickref h3{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .article-body .quickref ul{margin-left:18px;font-size:.95rem}
+  .article-body .quickref li{margin-bottom:5px}
+
+  @media (max-width:640px){
+    .blog .post{grid-template-columns:1fr;gap:4px}
+    .toxins{padding:30px 22px}
+    .foundation .tile{flex-direction:column;align-items:flex-start;gap:10px}
+    .masthead{flex-direction:column;gap:8px}
+    .masthead nav a{margin:0 18px 0 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="masthead">
+    <div class="site">Mental Health Nutrients</div>
+    <nav>
+      <a href="#table">The Table</a>
+      <a href="#toxins">Toxins</a>
+      <a href="#tools">Tools</a>
+      <a href="#notes">Field Notes</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="kicker">A periodic table for staying okay</div>
+  <h1>Mental health isn't one big thing to fix. It's a set of <em>nutrients</em> — and you can be low on just one.</h1>
+  <p>You already know how this works with food: you don't treat every hunger the same. Some things keep you alive, some things make life good, and some things are poison. Your mind works the same way. Click any nutrient below to see what its deficiency feels like — and how to replete it.</p>
+  <p class="from">Built from years of overcoming hard things.</p>
+</div>
+
+<div class="wrap legend" id="table">
+  <div class="key"><span class="dot" style="background:var(--trust)"></span>Trust</div>
+  <div class="key"><span class="dot" style="background:var(--self)"></span>Self</div>
+  <div class="key"><span class="dot" style="background:var(--resto)"></span>Restoration</div>
+  <div class="key"><span class="dot" style="background:var(--relat)"></span>Relational</div>
+  <div class="key"><span class="dot" style="background:var(--outward)"></span>Outward</div>
+  <div class="key"><span class="dot" style="background:var(--rhythm)"></span>Rhythm</div>
+  <div class="pair-note">⇄ marks balancing pairs — too much of one creates a deficiency in the other</div>
+</div>
+
+<section class="wrap">
+  <div class="table-grid" id="grid"></div>
+
+  <div class="foundation-label">The foundation row</div>
+  <div class="foundation">
+    <button class="tile" data-el="processing" style="--fam:var(--ink)">
+      <span class="sym">Pr</span>
+      <span class="fnd-text">
+        <span class="name">Processing</span>
+        <span class="sub">The element everything else sits on. Without taking time to process, you can't even read what you're low on — the noise never resolves into a deficiency you can name.</span>
+      </span>
+    </button>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="toxins" id="toxins">
+    <div class="section-head">
+      <h2>Anti-nutrients</h2>
+      <p>Deficiencies aren't the whole story. Some things actively deplete you — or block the good stuff from absorbing at all. Every toxin has an antidote.</p>
+    </div>
+    <div class="toxin-grid">
+      <div class="toxin">
+        <div class="t-name">Bitterness</div>
+        <div class="t-feel">Unforgiveness, jealousy, envy — something curdled toward another person. Replaying old conversations, carrying the same anger for years. Gossip is bitterness leaking out loud.</div>
+        <div class="t-anti">Antidote: <b>Forgiveness</b> — including forgiving yourself.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Comparison</div>
+        <div class="t-feel">The robber of joy and gratitude. Constant competition, measuring your life against someone else's — and taking what you have for granted while you do it.</div>
+        <div class="t-anti">Antidote: <b>Gratitude</b> — the robber can't take what you're actively counting.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">All-or-nothing thinking</div>
+        <div class="t-feel">He's either a good guy or an evil guy. A perfect day or a ruined one. All in, or giving up entirely — the same swing that drives binge cycles. When life has many greys.</div>
+        <div class="t-anti">Antidote: <b>Flexibility</b> — learning to think in greys.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Perfectionism</div>
+        <div class="t-feel">Up till 3am making it perfect. Holding perfection as the highest standard — a form of extreme thinking that keeps you stagnant, anguished, and miserable to be around.</div>
+        <div class="t-anti">Antidote: <b>Compromise</b> — judge perfectionism as imperfect, and hold compromise in higher regard.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">The sob story loop</div>
+        <div class="t-feel">Over-investing in your own suffering story instead of the mindsets and actions that change it. It can become an addiction — and it keeps you alone in it.</div>
+        <div class="t-anti">Antidote: <b>Action + Giving Back</b> — problem-solving over endless complaining; attention off yourself is the fastest exit.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">People-pleasing</div>
+        <div class="t-feel">The doormat pattern. Everyone's yes but your own, and their opinions running your decisions.</div>
+        <div class="t-anti">Antidote: <b>Authenticity</b> — with boundaries and learning your attachment style as the tools.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Insecurity</div>
+        <div class="t-feel">Shrinking. Second-guessing your worth in every room you walk into.</div>
+        <div class="t-anti">Antidote: <b>Confidence</b> — built through self-love and small brave actions.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Fear of rejection</div>
+        <div class="t-feel">Self-doubt doing the rejecting for them. Not sending it, not saying it, not trying — pre-rejecting yourself first.</div>
+        <div class="t-anti">Antidote: <b>Faith + Boldness</b> — inner confidence over imagined verdicts.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Pride that keeps you stuck</div>
+        <div class="t-feel">Too proud to ask for help, to apologize, to admit the plan isn't working. Vanity guarding a door you need to walk through.</div>
+        <div class="t-anti">Antidote: <b>Humility</b> — asking for help is strength, not defeat.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Forever-doom thinking</div>
+        <div class="t-feel">Extreme, end-of-the-world vibes. Blowing things out of proportion just because they feel loud.</div>
+        <div class="t-anti">Antidote: <b>Perspective</b> — the step back. Ask: is this 100% true?</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Worry</div>
+        <div class="t-feel">Rehearsing futures that haven't happened. The mind spinning on what you can't control tonight.</div>
+        <div class="t-anti">Antidote: <b>Faith</b> — inner confidence. The opposite of worry.</div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Rest guilt</div>
+        <div class="t-feel">Lying down but never landing. The constant hum of "I should be doing something." Deep down, that's not resting.</div>
+        <div class="t-anti">Antidote: <b>Healing your relationship with rest.</b></div>
+      </div>
+      <div class="toxin">
+        <div class="t-name">Isolation</div>
+        <div class="t-feel">Some seasons of solitude are necessary — but too long, and it cements. Your nervous system adapts until even sending a text feels jarring.</div>
+        <div class="t-anti">Antidote: <b>Support, repleted slowly</b> — new habits, inches out of the comfort zone at a time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap tools" id="tools">
+  <div class="section-head">
+    <h2>Tools</h2>
+    <p>Tools aren't nutrients — they're <em>how</em> you replete them. The same tool shows up behind different doors. When you keep meeting one, that's the table telling you it's load-bearing for you.</p>
+  </div>
+  <div class="tool-row">
+    <div class="tool">
+      <h3>Boundaries</h3>
+      <p>Nobody wakes up feeling "low on boundaries." What you feel is drained, resentful, overextended. Boundaries are the skill running underneath — how you reclaim the time and energy the other nutrients need.</p>
+      <div class="found-in">Found in: <span>Rest</span><span>Self-Care</span><span>Authenticity</span></div>
+    </div>
+    <div class="tool">
+      <h3>Journaling</h3>
+      <p>Digestion for the mind. Writing it down is how experience gets metabolized into something you can accept, learn from, or let go of.</p>
+      <div class="found-in">Found in: <span>Processing</span><span>Gratitude</span><span>Acceptance</span></div>
+    </div>
+    <div class="tool">
+      <h3>The self-date</h3>
+      <p>Time alone, on purpose. Not leftover time — chosen time. Perspective needs a quiet room.</p>
+      <div class="found-in">Found in: <span>Processing</span><span>Self-Care</span></div>
+    </div>
+    <div class="tool">
+      <h3>Going outside</h3>
+      <p>Forward motion. New things for your eyes. A walk works on your mind before it ever works on your body.</p>
+      <div class="found-in">Found in: <span>Nature</span><span>Action</span><span>Rest</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap blog" id="notes">
+  <div class="section-head">
+    <h2>Field notes</h2>
+    <p>Longer writing on one nutrient at a time — where the ideas on the table get room to breathe.</p>
+  </div>
+  <div class="post">
+    <div class="date">Coming soon</div>
+    <div>
+      <h3>Acceptance is a trace mineral</h3>
+      <p>You don't think about it for years. Then a loss arrives, and it's the whole problem. On grieving what's been lost.</p>
+    </div>
+  </div>
+  <div class="post">
+    <div class="date">Coming soon</div>
+    <div>
+      <h3>The year I cut my hair</h3>
+      <p>On flexibility: what happens when you flip a pattern you've been guarding for years — and why trying won't hurt.</p>
+    </div>
+  </div>
+  <div class="post">
+    <div class="date">Coming soon</div>
+    <div>
+      <h3>You might need to heal your relationship with rest</h3>
+      <p>So many people carry constant guilt about resting. That guilt might be the bigger thing.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Mental Health Nutrients · Built from lived experience, not a lab. This is a companion for self-care, not a substitute for professional support.
+  </div>
+</footer>
+
+<!-- Nutrient Facts modal -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="factsName">
+  <div class="facts" id="facts">
+    <button class="close" id="closeBtn" aria-label="Close">×</button>
+    <span class="fam-tag" id="famTag"></span>
+    <h2 id="factsName"></h2>
+    <div class="facts-title">Nutrient Facts</div>
+    <div class="serving" id="serving"></div>
+    <div class="row">
+      <div class="label">Deficiency feels like</div>
+      <p id="deficiency"></p>
+    </div>
+    <div class="row">
+      <div class="label">The mindset shift</div>
+      <p id="mindset"></p>
+    </div>
+    <div class="row">
+      <div class="label">Ways to replete</div>
+      <ul id="actions"></ul>
+    </div>
+    <div class="pair-line" id="pairLine"></div>
+    <button class="dive" id="diveBtn">Dive in deeper →<small>The full page on this nutrient — read it, or listen instead</small></button>
+    <div class="fine">Amounts vary by person and season. Listen to your own levels.</div>
+  </div>
+</div>
+
+<!-- Deep dive article -->
+<div class="article-overlay" id="articleOverlay" role="dialog" aria-modal="true" aria-labelledby="aTitle">
+  <div class="article">
+    <button class="back" id="backBtn">← Back to the table</button>
+    <span class="a-fam" id="aFam"></span>
+    <h1 id="aTitle"></h1>
+    <div class="a-serving" id="aServing"></div>
+    <div class="audio-bar">
+      <button class="play" aria-label="Play episode (coming soon)">▶</button>
+      <div class="a-meta"><b id="aEpisode"></b>Podcast episode coming soon — listen instead of reading</div>
+    </div>
+    <div class="article-body" id="aBody"></div>
+  </div>
+</div>
+
+<script>
+const FAM = {
+  trust:{label:"Trust family", color:"var(--trust)"},
+  self:{label:"Self family", color:"var(--self)"},
+  resto:{label:"Restoration family", color:"var(--resto)"},
+  relat:{label:"Relational family", color:"var(--relat)"},
+  outward:{label:"Outward family", color:"var(--outward)"},
+  rhythm:{label:"Rhythm axis", color:"var(--rhythm)"},
+  foundation:{label:"Foundation row", color:"var(--ink)"}
+};
+
+const ELEMENTS = [
+  // Trust family
+  {id:"hope", sym:"Ho", name:"Hope", fam:"trust", serving:"Daily — of any kind",
+   deficiency:"The future goes flat. Nothing feels worth reaching for, and today feels like all there is.",
+   mindset:"Hope doesn't have to be big or specific. Hope of any kind counts — a small thing to look forward to is still hope in your system.",
+   actions:["Put one thing on the calendar you can look forward to","Name one thing that could go right this week","Borrow hope from someone who's been where you are"]},
+  {id:"faith", sym:"Fa", name:"Faith", fam:"trust", serving:"Daily — the opposite of worry",
+   deficiency:"Worry running the show. Rehearsing futures that haven't happened. No inner confidence that things will hold.",
+   mindset:"The opposite of faith is worry. Faith is inner confidence — trusting that you'll be able to meet what comes, even before you know what it is.",
+   actions:["Notice one worry and ask: is this mine to carry tonight?","Recall a hard thing you already survived","Pray, or sit quietly with the trust you do have"]},
+  {id:"patience", sym:"Pa", name:"Patience", fam:"trust", serving:"In seasons",
+   deficiency:"Everything feels late. You're forcing timelines, rushing seasons, furious at how long things take.",
+   mindset:"Life moves in seasons, and some things only grow on their own schedule. Patience is the willingness to wait without deciding the wait means failure.",
+   actions:["Name the season you're actually in — not the one you wish you were in","Pick one thing to stop forcing this week","Look back at something that took longer than you wanted — and worked out"]},
+  {id:"gratitude", sym:"Gr", name:"Gratitude", fam:"trust", serving:"Daily — in any form",
+   deficiency:"Everything reads as lacking. The good things stop registering, even when they're right there.",
+   mindset:"Gratitude in any form counts. It's not pretending things are fine — it's letting the good that exists actually land. And when something good happens: pause and celebrate it instead of sprinting past.",
+   actions:["Write down three real things — small counts","Tell one person one specific thing you appreciate about them","Celebrate a win out loud before moving to the next thing"]},
+
+  // Self family
+  {id:"selflove", sym:"Sl", name:"Self-Love", fam:"self", serving:"Daily — check your inner voice",
+   deficiency:"The inner voice turns cruel. You'd never talk to a friend the way you're talking to yourself.",
+   mindset:"Check your inner voice: how are you taking care of yourself? Kindness toward yourself isn't indulgence — it's a baseline nutrient.",
+   actions:["Catch one harsh inner sentence and rewrite it the way you'd say it to a friend","Do one caring thing for yourself on purpose today","Notice what you did right today, not just what's left undone"]},
+  {id:"authenticity", sym:"Au", name:"Authenticity", fam:"self", serving:"Daily — freedom to be yourself",
+   deficiency:"You're performing. Saying yes when you mean no. Somewhere, things aren't aligning — the lies within us.",
+   mindset:"Authenticity is the freedom to be yourself. Ask: where are things not aligning for you? What are you pretending is fine that isn't?",
+   actions:["Find one place your outside doesn't match your inside","Say one true thing you've been swallowing","Practice a small no where you'd usually perform a yes"]},
+  {id:"acceptance", sym:"Ac", name:"Acceptance", fam:"self", serving:"Rarely needed — but when it is, nothing else works",
+   deficiency:"Fighting a truth. Stuck arguing with reality about something that already happened. Exhausted from the fight.",
+   mindset:"A lot of the time, acceptance means grieving what's been lost. It's a trace mineral: you won't touch it for years, and then a loss arrives and it becomes everything.",
+   actions:["Name the specific thing you're refusing to accept","Let yourself grieve it — grief is how acceptance happens","Ask what becomes possible once you stop fighting this one truth"]},
+  {id:"strength", sym:"St", name:"Strength", fam:"self", serving:"Built under load",
+   deficiency:"Feeling like you can't take one more thing. Ready to quit everything at once.",
+   mindset:"Perseverance, resilience, endurance — strength isn't something you have, it's something the hard seasons build. It builds character.",
+   actions:["Finish one small hard thing today to remind yourself you can","List the hard things you've already come through","Shrink the horizon: just get through today"]},
+
+  // Restoration family
+  {id:"rest", sym:"Re", name:"Rest", fam:"resto", serving:"Daily — without guilt", pair:"Action",
+   deficiency:"Tired but wired. Overstimulated, scrolling, never landing. Resting with a motor still running.",
+   mindset:"Sleep is rest, but so is mental rest — and too much social media is the opposite of it. If you rest with constant guilt, that's not resting. You might need to heal your relationship with rest itself.",
+   actions:["Protect a real stopping point tonight — a boundary around your evening","Trade thirty minutes of scrolling for actual quiet","Rest without earning it first, on purpose"]},
+  {id:"selfcare", sym:"Sc", name:"Self-Care", fam:"resto", serving:"Regularly — selfish time, on purpose", pair:"Giving Back",
+   deficiency:"Everyone gets a piece of you but you. Running on empty while taking care of everything else.",
+   mindset:"Self-care is more selfish time — and that's allowed. It balances giving back; you can't pour from an empty cup forever.",
+   actions:["Take a self-date: time alone, chosen, not leftover","Do the small maintenance things — your space, your skin, your body","Say no to one thing this week to make room for yourself"]},
+  {id:"nature", sym:"Na", name:"Nature", fam:"resto", serving:"Often — your eyes need new things",
+   deficiency:"Same four walls, same screen. Visually starved. You can't remember the last time you were outside for no reason.",
+   mindset:"Sunshine, green, movement, visual stimulation — your eyes need to see new things. Even a coffee shop counts. The forward motion of a walk works on your mind by itself.",
+   actions:["Walk outside with no destination and no phone","Take the dog out, or borrow someone's","Work one hour somewhere that isn't home"]},
+  {id:"play", sym:"Py", name:"Play", fam:"resto", serving:"Weekly minimum — laughter, silliness",
+   deficiency:"Everything's gotten heavy. You can't remember the last time you laughed hard. You feel old.",
+   mindset:"A time to be less serious. Play isn't dessert — a day you laughed hits different than a day you didn't, even when nothing else changed.",
+   actions:["Do one thing with no productive purpose whatsoever","Put yourself near the person who makes you laugh","Be silly on purpose — lower the stakes of one hour"]},
+
+  // Relational family
+  {id:"support", sym:"Su", name:"Support", fam:"relat", serving:"Daily — connection in any dose",
+   deficiency:"Carrying it all alone. Isolating. Nobody knows how it's actually going for you.",
+   mindset:"Support comes in every size: a therapist to talk to, a friend, a phone call, even a text. A pet. Connection is the nutrient — the form is flexible.",
+   actions:["Send the text you've been not-sending","Book the session, or the coffee","Let one person know how it's actually going"]},
+  {id:"flexibility", sym:"Fl", name:"Flexibility", fam:"relat", serving:"When the old way stops working",
+   deficiency:"Doing the same thing the same way for years — and it's only bringing bad outcomes. Stiff, stubborn, stuck.",
+   mindset:"Flexible thoughts. Meeting halfway. If a pattern has only made you miserable, be open to flipping it on its head. Trying won't hurt — see what changes.",
+   actions:["Pick one routine that isn't working and change it for a week","Compromise on one expectation you've been gripping","Take a leap of faith on a new pattern — the haircut, the break from social media, the different workout"]},
+
+  // Outward family
+  {id:"purpose", sym:"Pu", name:"Purpose", fam:"outward", serving:"Ongoing — of any kind",
+   deficiency:"Drifting. Days blur. Nothing you're doing feels like it's for anything.",
+   mindset:"Purpose of any kind. Passion of any kind. It doesn't have to be a calling — it just has to be yours, and pull you forward.",
+   actions:["Name one thing you're building, however small","Give this week one project that matters to you","Follow one curiosity for an hour and see if it's passion"]},
+  {id:"action", sym:"An", name:"Action", fam:"outward", serving:"Daily — motion in what you can control", pair:"Rest",
+   deficiency:"Procrastination, laziness, fear. Frozen. Everything piling up while you scroll.",
+   mindset:"Action is taking motion in the areas you can control: exercise, walking, cleaning your space, skincare. Boldness and bravery are nutrients too — and just the forward motion of a walk changes your mind.",
+   actions:["Do the ten-minute version of the thing you're avoiding","Clean one surface, one drawer, one corner","Move your body — walking counts, forward motion counts"]},
+  {id:"giving", sym:"Gv", name:"Giving Back", fam:"outward", serving:"When your own life is too heavy to look at", pair:"Self-Care",
+   deficiency:"Spiraling inward. Your own problems are the only channel, playing on loop.",
+   mindset:"When life gets so bad you can't even look at it without spiraling — focus on helping others. It's the fastest way out of your own loop. Balanced by self-care: it's a see-saw, not a lifestyle.",
+   actions:["Do one concrete thing for one specific person","Check on someone who's having a worse week than you","Volunteer an hour — attention on others is relief for you"]},
+
+  // Rhythm axis
+  {id:"new", sym:"Nw", name:"Something New", fam:"rhythm", serving:"When life goes stale", pair:"Stability",
+   deficiency:"Bored numb. Every day identical. Understimulated and calling it fine.",
+   mindset:"Change is mental stimulation. When everything is routine, the mind starts starving quietly — a new input can be a nutrient all by itself.",
+   actions:["Change one default: route, order, playlist, room","Learn or try one thing you've never done","Plan something that isn't on the usual loop"]},
+  {id:"stability", sym:"Sb", name:"Stability", fam:"rhythm", serving:"When you've lost your rhythm", pair:"Something New",
+   deficiency:"Out of sync. Lost your rhythm. Everything feels chaotic and nothing feels safe or in your control.",
+   mindset:"The opposite of something new. Sometimes what you need is your routine back — grounding, safety, more control. Rhythm is a nutrient too.",
+   actions:["Rebuild one anchor: same wake time, same walk, same meal","Ground yourself in your space — make one room feel like yours","Take back control of one small, ordinary thing"]},
+
+  // Foundation
+  {id:"processing", sym:"Pr", name:"Processing", fam:"foundation", serving:"Foundation — everything above requires it",
+   deficiency:"Going way too fast. No time taken to feel anything. Vibrating, full of unmetabolized stuff, unable to name what's wrong.",
+   mindset:"Processing is how the noise resolves into a deficiency you can actually read. Journaling, a self-date, time alone, perspective — it's digestion for everything else on this table.",
+   actions:["Journal until the vague bad feeling gets a name","Take yourself on a self-date — time alone, on purpose","Slow down long enough to ask: what haven't I let myself feel yet?"]}
+];
+
+const grid = document.getElementById('grid');
+ELEMENTS.filter(e => e.fam !== 'foundation').forEach(el => {
+  const b = document.createElement('button');
+  b.className = 'tile';
+  b.style.setProperty('--fam', FAM[el.fam].color);
+  b.dataset.el = el.id;
+  b.innerHTML = `
+    ${el.pair ? `<span class="pair" title="Balances with ${el.pair}">⇄</span>` : ''}
+    <span class="sym">${el.sym}</span>
+    <span>
+      <span class="name">${el.name}</span>
+      <span class="sub" style="display:block">${FAM[el.fam].label}</span>
+    </span>`;
+  grid.appendChild(b);
+});
+
+// Deep-dive pages. Each nutrient can have a written essay in DEEP.
+// Until McKayla writes one, a structured template renders with prompts for her to fill.
+const DEEP = {
+  hope: `
+    <p class="prompt">Sample structure — replace every section with your own words. This page is yours.</p>
+    <h2>What hope actually is</h2>
+    <p class="prompt">Your definition, in your voice. Hope of any kind counts — say what that has meant for you.</p>
+    <h2>What running low looked like for me</h2>
+    <p class="prompt">A season from your own life when hope was the missing nutrient — what it felt like from the inside, before you could name it.</p>
+    <h2>How I raise it now</h2>
+    <p class="prompt">Your real practices. The small things that put hope back in your system, from years of overcoming hard things.</p>
+    <h2>If you only remember one thing</h2>
+    <p class="prompt">One line to leave them with.</p>`
+};
+
+function deepTemplate(el){
+  return DEEP[el.id] || `
+    <h2>What ${el.name.toLowerCase()} actually is</h2>
+    <p class="prompt">This page is being written. For now, the quick label below has what you need.</p>`;
+}
+
+const overlay = document.getElementById('overlay');
+const closeBtn = document.getElementById('closeBtn');
+const articleOverlay = document.getElementById('articleOverlay');
+const backBtn = document.getElementById('backBtn');
+const diveBtn = document.getElementById('diveBtn');
+let currentId = null;
+let lastFocus = null;
+
+function openDeep(id){
+  const el = ELEMENTS.find(e => e.id === id);
+  if(!el) return;
+  document.getElementById('aFam').textContent = FAM[el.fam].label;
+  document.getElementById('aFam').style.background = FAM[el.fam].color;
+  document.getElementById('aTitle').textContent = el.name;
+  document.getElementById('aServing').textContent = `Suggested intake: ${el.serving}`;
+  document.getElementById('aEpisode').textContent = `The ${el.name} episode`;
+  document.getElementById('aBody').innerHTML = deepTemplate(el) + `
+    <div class="quickref">
+      <h3>The quick label</h3>
+      <p style="margin-bottom:10px"><b>Deficiency feels like:</b> ${el.deficiency}</p>
+      <p style="margin-bottom:10px"><b>The mindset shift:</b> ${el.mindset}</p>
+      <ul>${el.actions.map(a=>`<li>${a}</li>`).join('')}</ul>
+    </div>`;
+  overlay.classList.remove('open');
+  articleOverlay.classList.add('open');
+  articleOverlay.scrollTop = 0;
+  backBtn.focus();
+}
+function closeDeep(){
+  articleOverlay.classList.remove('open');
+  if(lastFocus) lastFocus.focus();
+}
+diveBtn.addEventListener('click', () => openDeep(currentId));
+backBtn.addEventListener('click', closeDeep);
+
+function openFacts(id){
+  const el = ELEMENTS.find(e => e.id === id);
+  if(!el) return;
+  currentId = id;
+  document.getElementById('famTag').textContent = FAM[el.fam].label;
+  document.getElementById('famTag').style.background = FAM[el.fam].color;
+  document.getElementById('factsName').textContent = `${el.sym} — ${el.name}`;
+  document.getElementById('serving').textContent = `Suggested intake: ${el.serving}`;
+  document.getElementById('deficiency').textContent = el.deficiency;
+  document.getElementById('mindset').textContent = el.mindset;
+  const ul = document.getElementById('actions');
+  ul.innerHTML = '';
+  el.actions.forEach(a => {
+    const li = document.createElement('li');
+    li.textContent = a;
+    ul.appendChild(li);
+  });
+  const pl = document.getElementById('pairLine');
+  pl.textContent = el.pair ? `⇄ Balances with ${el.pair}. Too much of one creates a deficiency in the other.` : '';
+  pl.style.display = el.pair ? 'block' : 'none';
+  lastFocus = document.activeElement;
+  overlay.classList.add('open');
+  closeBtn.focus();
+}
+function closeFacts(){
+  overlay.classList.remove('open');
+  if(lastFocus) lastFocus.focus();
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('.tile');
+  if(t) openFacts(t.dataset.el);
+  if(e.target === overlay) closeFacts();
+});
+closeBtn.addEventListener('click', closeFacts);
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Escape') return;
+  if(articleOverlay.classList.contains('open')) closeDeep();
+  else if(overlay.classList.contains('open')) closeFacts();
+});
+</script>
+</body>
+</html>
