@@ -4,6 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mental Health Nutrients — A Periodic Table for Staying Okay</title>
+<meta name="description" content="Mental health isn't one giant thing to fix — it's a table of small, nameable things to tend. Check your levels.">
+<link rel="canonical" href="https://flexiblemind.vercel.app/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flexiblemind.vercel.app/">
+<meta property="og:site_name" content="Mental Health Nutrients">
+<meta property="og:title" content="A periodic table for staying okay">
+<meta property="og:description" content="Mental health isn't one giant thing to fix — it's a table of small, nameable things to tend. Check your levels.">
+<meta property="og:image" content="https://flexiblemind.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A periodic table for staying okay.">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A periodic table for staying okay">
+<meta name="twitter:description" content="Mental health isn't one giant thing to fix — it's a table of small, nameable things to tend. Check your levels.">
+<meta name="twitter:image" content="https://flexiblemind.vercel.app/og-image.png">
+<meta name="twitter:image:alt" content="A periodic table for staying okay.">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 <style>
@@ -409,6 +430,31 @@
   @media (prefers-reduced-motion:reduce){
     .test-tease{animation:none}
   }
+  #systemPage{background:#F5E7EA}
+  #systemPage .back{border-color:#E3C7CE}
+  .slide{display:none;min-height:56vh}
+  .slide.on{display:block;animation:slideIn .4s ease}
+  @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .slide-h{font-family:'Young Serif',serif;font-weight:400;font-size:clamp(1.8rem,4.6vw,2.7rem);line-height:1.12;color:#7A4353;margin:22px 0 16px}
+  .slide-p{color:#5C4249;max-width:52ch;margin-bottom:14px;font-size:1.05rem}
+  .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:26px}
+  .mini-cell{background:#FBF3F5;border:1px solid #E7D2D8;border-top:4px solid var(--fam);border-radius:5px;
+    padding:9px 8px;font-size:.72rem;line-height:1.2;color:#5C4249;font-family:'Karla',sans-serif;min-height:46px;display:flex;align-items:center}
+  .mini-tox{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:26px}
+  .mini-chip{background:var(--toxin-bg);color:var(--toxin-ink);border-radius:5px;padding:10px 9px;font-size:.72rem;line-height:1.25;min-height:46px;display:flex;align-items:center}
+  .slide-nav{display:flex;align-items:center;justify-content:space-between;margin-top:44px;padding-top:20px;border-top:1px solid #E3C7CE}
+  .slide-btn{background:none;border:1px solid #D8AFBA;border-radius:50%;width:44px;height:44px;font-size:1rem;color:#7A4353;cursor:pointer}
+  .slide-btn:hover{background:#EFD9DE}
+  .slide-btn[disabled]{opacity:.3;cursor:default}
+  .dots{display:flex;gap:9px}
+  .dots span{width:8px;height:8px;border-radius:50%;background:#DFBFC7}
+  .dots span.on{background:#A8637A}
+  @media (max-width:640px){.mini-grid{grid-template-columns:repeat(3,1fr)}.mini-tox{grid-template-columns:repeat(2,1fr)}}
+  .hero-links{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px 26px}
+  .hero-links a{color:var(--ink-soft);text-decoration:none;font-size:.95rem;border-bottom:1px solid var(--line);padding-bottom:2px}
+  .hero-links a:hover{color:var(--ink);border-color:var(--ink-soft)}
+  .page-title{font-family:'Young Serif',serif;font-weight:400;font-size:1.9rem;margin-bottom:8px;color:#4E6B4F}
+  .page-lede{color:var(--ink-soft);max-width:56ch;margin-bottom:6px}
   .hero-test{
     margin-top:12px;background:var(--ink);color:#fff;border:none;border-radius:44px;
     padding:23px 52px;font-family:'Karla',sans-serif;font-weight:700;
@@ -448,6 +494,9 @@
   .res-head{padding:40px 0 8px;max-width:60ch}
   .res-head h1{font-family:'Young Serif',serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.6rem);margin-bottom:12px}
   .res-sub{color:var(--ink-soft)}
+  .res-compare{margin:16px 0 0;padding:14px 18px;background:#EDF1E3;border:1px solid var(--line);border-radius:10px}
+  .res-compare h3{font-family:'Karla',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+  .res-compare p{color:var(--ink-soft);font-size:.92rem;margin:2px 0}
   .res-tender{
     background:#E3E8EF;border-radius:10px;padding:20px 22px;color:#2B3644;font-size:.98rem;
   }
@@ -497,6 +546,18 @@
     .masthead{flex-direction:column;gap:8px}
     .masthead nav a{margin:0 18px 0 0}
   }
+  /* ---- phone pass (<=430px) ---- */
+  @keyframes teasePulseMobile{0%,100%{opacity:.78}50%{opacity:1}}
+  @media (max-width:430px){
+    html,body{overflow-x:hidden}
+    .wrap{padding:0 20px}
+    .hero{padding:72px 20px 48px}
+    .hero h1 .ln{white-space:normal}
+    .test-tease{font-size:.74rem;white-space:normal;max-width:100%;animation:teasePulseMobile 1.5s ease-in-out infinite}
+    .q-opt{padding:12px 18px;font-size:.95rem}
+    .q-next{padding:14px 26px}
+    .q-back{padding:10px 4px}
+  }
   @media (prefers-reduced-motion:reduce){
     *{transition:none!important}
     html{scroll-behavior:auto}
@@ -509,9 +570,10 @@
   <div class="masthead">
     <div class="site">Mental Health Nutrients</div>
     <nav>
-      <a href="#table">The Table</a>
-      <a href="#toxins">Toxins</a>
+      <a href="#" id="navTable">The Table</a>
+      <a href="#" id="navToxins">Toxins</a>
       <a href="#" id="weatherLink">Heavy Weather</a>
+      <a href="#" id="navSystem">The System</a>
       <a href="#" id="remediesLink">Home Remedies</a>
       <a href="#" id="testLink">Check Your Levels</a>
       <a href="#" id="aboutLink">About</a>
@@ -521,35 +583,19 @@
 
 <div class="wrap hero">
   <h1><span class="ln">A periodic table</span><span class="ln">for staying okay.</span></h1>
-  <div class="test-tease">Check your levels with this free quick assessment test</div>
+  <div class="test-tease">Check your levels with this free assessment test</div>
   <button class="hero-test" id="heroTest">Check your levels →</button>
-</div>
-
-<div class="wrap legend" id="table">
-  <div class="key"><span class="dot" style="background:var(--trust)"></span>Trust</div>
-  <div class="key"><span class="dot" style="background:var(--self)"></span>Self</div>
-  <div class="key"><span class="dot" style="background:var(--resto)"></span>Restoration</div>
-  <div class="key"><span class="dot" style="background:var(--relat)"></span>Relational</div>
-  <div class="key"><span class="dot" style="background:var(--outward)"></span>Outward</div>
-  <div class="key"><span class="dot" style="background:var(--rhythm)"></span>Rhythm</div>
-  <div class="pair-note">⇄ marks balancing pairs — too much of one creates a deficiency in the other</div>
-</div>
-
-<section class="wrap">
-  <div class="table-grid" id="grid"></div>
-
-</section>
-
-<section class="wrap">
-  <div class="toxins" id="toxins">
-    <div class="section-head">
-      <h2>Anti-nutrients</h2>
-      <p>Deficiencies aren't the whole story. Some things actively deplete you — or block the good stuff from absorbing at all. Every toxin has an antidote.</p>
-    </div>
-    <div class="toxin-grid" id="toxinGrid"></div>
-  
+  <div class="hero-links">
+    <a href="#" id="heroTable">The table</a>
+    <a href="#" id="heroToxins">Anti-nutrients</a>
+    <a href="#" id="heroSystem">The system</a>
+    <a href="#" id="heroAbout">About</a>
   </div>
-</section>
+</div>
+
+
+
+
 
 
 
@@ -793,6 +839,83 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- The system -->
+<div class="page-overlay" id="systemPage" role="dialog" aria-modal="true" aria-label="The system">
+  <div class="wrap" style="padding-top:34px;padding-bottom:70px;max-width:760px">
+    <button class="back" id="systemBack">← Back</button>
+
+    <div class="slide on" data-slide="0">
+      <h2 class="slide-h">When it comes to mental health, I believe in daily nutrients.</h2>
+      <p class="slide-p">Every season requires different things from us, and when we’re feeling off, usually it’s because we’re low on something specific. Naming it is half the battle, and puts the power back in your hands.</p>
+    </div>
+
+    <div class="slide" data-slide="1">
+      <h2 class="slide-h">This is the periodic table.</h2>
+      <p class="slide-p">Each one of these elements is a nutrient you can become deficient in.</p>
+      <div class="mini-grid" id="miniGrid"></div>
+    </div>
+
+    <div class="slide" data-slide="2">
+      <h2 class="slide-h">And these are the anti-nutrients.</h2>
+      <p class="slide-p">Mindsets and negative thinking that weigh us down — and block the good things from absorbing. Every one has an antidote.</p>
+      <div class="mini-tox" id="miniTox"></div>
+    </div>
+
+    <div class="slide" data-slide="3">
+      <h2 class="slide-h">So — what are you low on?</h2>
+      <p class="slide-p">Take the assessment and get your levels back, like a panel of bloodwork for how you have been feeling.</p>
+      <button class="hero-test" id="systemTest" style="margin-top:26px">Check your levels →</button>
+    </div>
+
+    <div class="slide-nav">
+      <button id="slidePrev" class="slide-btn">←</button>
+      <div class="dots" id="slideDots"></div>
+      <button id="slideNext" class="slide-btn">→</button>
+    </div>
+  </div>
+</div>
+
+<!-- The table -->
+<div class="page-overlay" id="tablePage" role="dialog" aria-modal="true" aria-label="The table">
+  <div class="wrap" style="padding-top:34px">
+    <button class="back" id="tableBack">← Back</button>
+    <h2 class="page-title">The table</h2>
+    <p class="page-lede">Twenty-one nutrients. Tap any one to see what running low feels like — and how to replete it.</p>
+  </div>
+<div class="wrap legend" id="table">
+  <div class="key"><span class="dot" style="background:var(--trust)"></span>Trust</div>
+  <div class="key"><span class="dot" style="background:var(--self)"></span>Self</div>
+  <div class="key"><span class="dot" style="background:var(--resto)"></span>Restoration</div>
+  <div class="key"><span class="dot" style="background:var(--relat)"></span>Relational</div>
+  <div class="key"><span class="dot" style="background:var(--outward)"></span>Outward</div>
+  <div class="key"><span class="dot" style="background:var(--rhythm)"></span>Rhythm</div>
+  <div class="pair-note">⇄ marks balancing pairs — too much of one creates a deficiency in the other</div>
+</div>
+<section class="wrap">
+  <div class="table-grid" id="grid"></div>
+
+</section>
+  <div class="wrap" style="padding-bottom:80px"></div>
+</div>
+
+<!-- The toxin panel -->
+<div class="page-overlay" id="toxinsPage" role="dialog" aria-modal="true" aria-label="Anti-nutrients">
+  <div class="wrap" style="padding-top:34px">
+    <button class="back" id="toxinsBack">← Back</button>
+  </div>
+<section class="wrap">
+  <div class="toxins" id="toxins">
+    <div class="section-head">
+      <h2>Anti-nutrients</h2>
+      <p>Deficiencies aren't the whole story. Some things actively deplete you — or block the good stuff from absorbing at all. Every toxin has an antidote.</p>
+    </div>
+    <div class="toxin-grid" id="toxinGrid"></div>
+  
+  </div>
+</section>
+  <div class="wrap" style="padding-bottom:80px"></div>
 </div>
 
 <!-- Check your levels -->
@@ -1149,6 +1272,7 @@ function openToxin(id){
   if(!t) return;
   currentId = id; currentKind = 'toxin';
   setModalMode('toxin');
+  diveBtn.style.display = 'none'; // no toxin essays written yet
   document.getElementById('famTag').textContent = 'Anti-nutrient';
   document.getElementById('famTag').style.background = 'var(--toxin-bg)';
   document.getElementById('factsName').textContent = t.name;
@@ -1220,6 +1344,7 @@ function openFacts(id){
   if(!el) return;
   currentId = id; currentKind = 'nutrient';
   setModalMode('nutrient');
+  diveBtn.style.display = DEEP[el.id] ? '' : 'none'; // only when a real essay exists
   document.getElementById('famTag').textContent = FAM[el.fam].label;
   document.getElementById('famTag').style.background = FAM[el.fam].color;
   document.getElementById('factsName').textContent = el.name;
@@ -1398,11 +1523,42 @@ function isTender(){
   return scoreAll().filter(s=>s.tier===2).length >= 8;
 }
 
+// ----- saved results (local to this device only, never sent anywhere) -----
+const RESULTS_KEY = 'fm_results_v1';
+function loadHistory(){
+  try { const v = JSON.parse(localStorage.getItem(RESULTS_KEY)); return Array.isArray(v) ? v : []; }
+  catch(e){ return []; }
+}
+function saveHistory(h){ try { localStorage.setItem(RESULTS_KEY, JSON.stringify(h)); } catch(e){} }
+function clearHistory(){ try { localStorage.removeItem(RESULTS_KEY); } catch(e){} }
+function fmtResultDate(ts){
+  try { return new Date(ts).toLocaleDateString(undefined,{month:'short',day:'numeric'}); }
+  catch(e){ return ''; }
+}
+
 function showResults(){
   const scores = scoreAll();
   const byId = {}; scores.forEach(s => byId[s.id] = s);
   const tender = isTender();
   const tierName = ['within range','slightly low','low'];
+
+  // Read the previous result BEFORE saving this one, so the comparison looks back a visit.
+  const history = loadHistory();
+  const prev = history.length ? history[history.length-1] : null;
+  let compareHtml = '';
+  if(prev && prev.scores){
+    const changes = [];
+    ELEMENTS.forEach(el => {
+      if(!byId[el.id] || !(el.id in prev.scores)) return;
+      const before = prev.scores[el.id], after = byId[el.id].tier;
+      if(before !== after) changes.push({ name: el.name, before, after, low: after });
+    });
+    // Surface the most currently-relevant shifts first, keep it short and calm.
+    changes.sort((a,b) => b.low - a.low);
+    const lines = changes.slice(0,3).map(c => `<p>${c.name} was ${tierName[c.before]}, now ${tierName[c.after]}.</p>`);
+    const body = lines.length ? lines.join('') : '<p>Your levels look about the same as last time.</p>';
+    compareHtml = `<div class="res-compare" id="resCompare"><h3>Last time (${fmtResultDate(prev.date)})</h3>${body}</div>`;
+  }
   const focus = scores
     .filter(s => s.id !== 'giving' && !(tender && s.id === 'action') && s.tier > 0)
     .sort((x,y) => y.pct - x.pct).slice(0,3);
@@ -1413,6 +1569,8 @@ function showResults(){
     : '<p class="res-sub">Levels shift with seasons. Here\'s where yours are sitting right now.</p>';
   h += '</div>';
 
+  h += compareHtml;
+
   if(focus.length){
     h += '<div class="res-focus"><h2>What you\'re low on</h2><div class="res-tiles">';
     focus.forEach(f => {
@@ -1422,7 +1580,7 @@ function showResults(){
         <div class="rt-words">${el.words||''}</div>
         <div class="rt-tier">${tierName[f.tier]}</div>
         <div class="rt-act">${el.actions[0]}</div>
-        <button class="rt-dive" data-el="${el.id}">Dive in deeper →</button>
+        ${DEEP[el.id] ? `<button class="rt-dive" data-el="${el.id}">Dive in deeper →</button>` : ''}
       </div>`;
     });
     h += '</div></div>';
@@ -1443,8 +1601,8 @@ function showResults(){
   h += `<div class="res-foot">
     <p>Levels shift with seasons — come back and check again.</p>
     <button class="res-share" id="resShare">Send this to a friend who needs their levels checked</button>
-    <div class="res-links"><button id="resRetake">Take it again</button><button id="resClose">Back to the table</button></div>
-    <p class="res-privacy">Nothing here is saved or sent anywhere. This stays between you and your screen.</p>
+    <div class="res-links"><button id="resRetake">Take it again</button><button id="resClose">Back to the table</button><button id="resForget">Delete saved results</button></div>
+    <p class="res-privacy">Nothing here is sent anywhere — your results are saved only on this device, and you can delete them anytime. This stays between you and your screen.</p>
   </div>`;
 
   testBody.innerHTML = h;
@@ -1457,6 +1615,21 @@ function showResults(){
   }));
   document.getElementById('resRetake').addEventListener('click', openTest);
   document.getElementById('resClose').addEventListener('click', closeTest);
+  const forgetBtn = document.getElementById('resForget');
+  if(forgetBtn){
+    forgetBtn.addEventListener('click', () => {
+      clearHistory();
+      const cmp = document.getElementById('resCompare'); if(cmp) cmp.remove();
+      forgetBtn.textContent = 'Saved results deleted';
+      forgetBtn.disabled = true;
+    });
+  }
+  // Save this completed result on the device only (date + per-nutrient tier).
+  const savedResult = { date: Date.now(), scores: {} };
+  scores.forEach(s => { savedResult.scores[s.id] = s.tier; });
+  history.push(savedResult);
+  if(history.length > 20) history.splice(0, history.length - 20);
+  saveHistory(history);
   document.getElementById('resShare').addEventListener('click', () => {
     const url = location.href.split('#')[0];
     const data = { title:'Check your levels', text:'Check your levels — a periodic table for staying okay.', url };
@@ -1471,6 +1644,56 @@ function showResults(){
   });
 }
 
+function openPage(el){ lastFocus = document.activeElement; el.classList.add('open'); el.scrollTop = 0; }
+const tablePage = document.getElementById('tablePage');
+const toxinsPage = document.getElementById('toxinsPage');
+[['heroTable',tablePage],['heroToxins',toxinsPage],['navTable',tablePage],['navToxins',toxinsPage]].forEach(([id,pg]) => {
+  document.getElementById(id).addEventListener('click', e => { e.preventDefault(); openPage(pg); });
+});
+document.getElementById('tableBack').addEventListener('click', () => { tablePage.classList.remove('open'); if(lastFocus) lastFocus.focus(); });
+document.getElementById('toxinsBack').addEventListener('click', () => { toxinsPage.classList.remove('open'); if(lastFocus) lastFocus.focus(); });
+const systemPage = document.getElementById('systemPage');
+[['heroSystem'],['navSystem']].forEach(([id]) => {
+  document.getElementById(id).addEventListener('click', e => { e.preventDefault(); openPage(systemPage); if(window.resetSlides) window.resetSlides(); });
+});
+
+// ---- The system: slides ----
+(function(){
+  const mini = document.getElementById('miniGrid');
+  ELEMENTS.forEach(el => {
+    const d = document.createElement('div');
+    d.className = 'mini-cell';
+    d.style.setProperty('--fam', FAM[el.fam].color);
+    d.textContent = el.name;
+    mini.appendChild(d);
+  });
+  const mt = document.getElementById('miniTox');
+  TOXINS.forEach(t => {
+    const d = document.createElement('div');
+    d.className = 'mini-chip';
+    d.textContent = t.name;
+    mt.appendChild(d);
+  });
+  const slides = [...document.querySelectorAll('#systemPage .slide')];
+  const dots = document.getElementById('slideDots');
+  slides.forEach(() => dots.appendChild(document.createElement('span')));
+  let idx = 0;
+  function show(i){
+    idx = Math.max(0, Math.min(slides.length-1, i));
+    slides.forEach((s,n) => s.classList.toggle('on', n===idx));
+    [...dots.children].forEach((d,n) => d.classList.toggle('on', n===idx));
+    document.getElementById('slidePrev').disabled = idx===0;
+    document.getElementById('slideNext').disabled = idx===slides.length-1;
+    systemPage.scrollTop = 0;
+  }
+  document.getElementById('slidePrev').addEventListener('click', () => show(idx-1));
+  document.getElementById('slideNext').addEventListener('click', () => show(idx+1));
+  document.getElementById('systemTest').addEventListener('click', () => { systemPage.classList.remove('open'); openTest(); });
+  window.resetSlides = () => show(0);
+  show(0);
+})();
+document.getElementById('systemBack').addEventListener('click', () => { systemPage.classList.remove('open'); if(lastFocus) lastFocus.focus(); });
+document.getElementById('heroAbout').addEventListener('click', e => { e.preventDefault(); openPage(aboutPage); });
 document.getElementById('testLink').addEventListener('click', e => { e.preventDefault(); openTest(); });
 document.getElementById('heroTest').addEventListener('click', openTest);
 document.getElementById('testBack').addEventListener('click', closeTest);
@@ -1482,6 +1705,9 @@ document.addEventListener('keydown', e => {
   else if(remediesPage.classList.contains('open')) remediesPage.classList.remove('open');
   else if(aboutPage.classList.contains('open')) aboutPage.classList.remove('open');
   else if(testPage.classList.contains('open')) closeTest();
+  else if(tablePage.classList.contains('open')) tablePage.classList.remove('open');
+  else if(toxinsPage.classList.contains('open')) toxinsPage.classList.remove('open');
+  else if(systemPage.classList.contains('open')) systemPage.classList.remove('open');
   else if(overlay.classList.contains('open')) closeFacts();
 });
 </script>
