@@ -393,6 +393,11 @@
   }
   .audio-bar .a-meta{font-size:.88rem;color:var(--ink-soft)}
   .audio-bar .a-meta b{color:var(--ink);display:block;font-size:.92rem}
+  .audio-bar .play.live{opacity:1;cursor:pointer}
+  .audio-bar .play.live:hover{opacity:.88}
+  .a-line{height:4px;background:var(--line);border-radius:4px;margin:8px 0 6px;overflow:hidden}
+  .a-line span{display:block;height:100%;width:0%;background:var(--resto);border-radius:4px}
+  .a-time{font-size:.8rem;color:var(--ink-soft)}
   .article-body h2{
     font-family:'Young Serif',serif;font-weight:400;font-size:1.35rem;
     margin:36px 0 12px;
@@ -937,10 +942,7 @@
     <span class="a-fam" id="aFam"></span>
     <h1 id="aTitle"></h1>
     <div class="a-serving" id="aServing"></div>
-    <div class="audio-bar">
-      <button class="play" aria-label="Play episode (coming soon)">▶</button>
-      <div class="a-meta"><b id="aEpisode"></b>Podcast episode coming soon — listen instead of reading</div>
-    </div>
+    <div class="audio-bar" id="audioBar"></div>
     <div class="article-body" id="aBody"></div>
   </div>
 </div>
@@ -1173,6 +1175,53 @@ const DEEP = {
     <p>Everyone has to fight and overcome their own obstacles. Just keep stepping. Be kind to yourself, and keep praying every day for strength to overcome, wisdom to know, and hope that there's so much more for you than this season.</p>`
 };
 
+// Audio narration. Point an entry at one file, or a list of parts that play back to back.
+// Files live in an /audio folder in the repo, alongside index.html.
+const AUDIO = {
+  action: "audio/action.mp3"
+};
+
+let player = null, queue = [], qIdx = 0;
+function stopAudio(){ if(player){ player.pause(); player = null; } queue = []; qIdx = 0; }
+function buildAudioBar(id, label){
+  const bar = document.getElementById('audioBar');
+  const src = AUDIO[id];
+  stopAudio();
+  if(!src){
+    bar.innerHTML = '<button class="play" aria-label="Play episode (coming soon)">\u25b6</button>' +
+      '<div class="a-meta"><b>' + label + '</b>Audio coming soon \u2014 listen instead of reading</div>';
+    return;
+  }
+  queue = Array.isArray(src) ? src.slice() : [src];
+  qIdx = 0;
+  bar.innerHTML = '<button class="play live" id="playBtn" aria-label="Play">\u25b6</button>' +
+    '<div class="a-meta" style="flex:1"><b>' + label + '</b>' +
+    '<div class="a-line"><span id="aFill"></span></div>' +
+    '<div class="a-time"><span id="aNow">0:00</span> \u00b7 listen instead of reading</div></div>';
+  const btn = document.getElementById('playBtn');
+  const fill = document.getElementById('aFill');
+  const now = document.getElementById('aNow');
+  function fmt(t){ t = Math.floor(t||0); return Math.floor(t/60) + ':' + String(t%60).padStart(2,'0'); }
+  function load(i){
+    player = new Audio(queue[i]);
+    player.addEventListener('timeupdate', () => {
+      if(player.duration) fill.style.width = (player.currentTime/player.duration*100) + '%';
+      now.textContent = fmt(player.currentTime);
+    });
+    player.addEventListener('ended', () => {
+      if(qIdx < queue.length-1){ qIdx++; load(qIdx); player.play(); }
+      else { btn.textContent = '\u25b6'; fill.style.width = '0%'; }
+    });
+    player.addEventListener('error', () => { now.textContent = 'audio not found'; });
+  }
+  load(0);
+  btn.addEventListener('click', () => {
+    if(!player) return;
+    if(player.paused){ player.play(); btn.textContent = '\u2016'; }
+    else { player.pause(); btn.textContent = '\u25b6'; }
+  });
+}
+
 function deepTemplate(el){
   return DEEP[el.id] || `
     <h2>What ${el.name.toLowerCase()} actually is</h2>
@@ -1317,7 +1366,7 @@ function openDeep(id){
   document.getElementById('aFam').style.background = FAM[el.fam].color;
   document.getElementById('aTitle').textContent = el.name;
   document.getElementById('aServing').textContent = `Suggested intake: ${el.serving}`;
-  document.getElementById('aEpisode').textContent = `The ${el.name} episode`;
+  buildAudioBar(el.id, `The ${el.name} episode`);
   document.getElementById('aBody').innerHTML = deepTemplate(el) + `
     <div class="quickref">
       <h3>The quick label</h3>
@@ -1338,7 +1387,7 @@ function openDeepToxin(id){
   document.getElementById('aFam').style.background = 'var(--toxin-bg)';
   document.getElementById('aTitle').textContent = t.name;
   document.getElementById('aServing').textContent = `Common exposure: ${t.exposure}`;
-  document.getElementById('aEpisode').textContent = `The ${t.name} episode`;
+  buildAudioBar(t.id, `The ${t.name} episode`);
   document.getElementById('aBody').innerHTML = `
     <h2>What this toxin actually is</h2>
     <p class="prompt">This page is being written. For now, the warning label below has what you need.</p>
@@ -1355,6 +1404,7 @@ function openDeepToxin(id){
 }
 
 function closeDeep(){
+  stopAudio();
   articleOverlay.classList.remove('open');
   if(lastFocus) lastFocus.focus();
 }
